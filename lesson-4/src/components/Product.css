@@ -1,0 +1,14 @@
+.product {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 210px;
+}
+
+.category {
+    color: silver;
+}
+
+.price {
+    font-weight: bold;
+}
