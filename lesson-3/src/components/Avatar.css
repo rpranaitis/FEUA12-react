@@ -1,0 +1,24 @@
+.avatar {
+    background: silver;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.bg-green {
+    background: #6bc143;
+}
+
+.bg-blue {
+    background: #4378c1;
+}
+
+.bg-red {
+    background: #c14343;
+}
