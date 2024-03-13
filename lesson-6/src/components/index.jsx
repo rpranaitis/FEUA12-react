@@ -1,4 +1,5 @@
-import Product from "./Product/Product";
 import Button from "./Button/Button";
+import Product from "./Product/Product";
+import Products from "./Products/Products";
 
-export { Product, Button };
+export { Button, Product, Products };
