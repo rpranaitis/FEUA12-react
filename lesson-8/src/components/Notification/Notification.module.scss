@@ -1,0 +1,29 @@
+.notification {
+  color: white;
+  padding: 15px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .leftSide {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.primary {
+    background: #3598db;
+}
+
+.success {
+    background: #00bc8c;
+}
+
+.error {
+    background: #e84c3d;
+}
