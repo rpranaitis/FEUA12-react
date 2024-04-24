@@ -3,7 +3,6 @@ import { registerUser, updateUser } from '../../api/users';
 import { personalFields, addressFields, companyFields } from './fields';
 import { registerInitialValues } from './initialValues';
 import { validationSchema } from './validationSchema';
-import { hasNestedProperty } from '../../utils/helpers';
 import Button from '../Button/Button';
 import style from './RegisterForm.module.scss';
 import classNames from 'classnames';
