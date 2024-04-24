@@ -12,3 +12,9 @@ export const registerUser = async (data) => {
 
   return await response.data;
 };
+
+export const updateUser = async (data) => {
+  const response = await axios.put(`${API}/users/${data.id}`, data);
+
+  return await response.data;
+};
