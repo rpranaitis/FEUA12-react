@@ -30,10 +30,10 @@ const registerInitialValues = {
   },
 };
 
-const RegisterForm = ({ obj }) => {
+const RegisterForm = ({ editingUser }) => {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
-      const response = await registerUser(values);
+      const response = editingUser ? await updateUser(values) : await registerUser(values);
       resetForm();
       setSubmitting(false);
     } catch (error) {
@@ -43,7 +43,8 @@ const RegisterForm = ({ obj }) => {
 
   return (
     <Formik
-      initialValues={registerInitialValues}
+      initialValues={editingUser ?? registerInitialValues}
+      enableReinitialize
       onSubmit={handleSubmit}
       validate={(values) => {
         const errors = {};
@@ -77,7 +78,7 @@ const RegisterForm = ({ obj }) => {
                   name={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                ></Field>
+                />
                 <ErrorMessage name={field.name}>
                   {(error) => <div style={{ color: '#f16b6b', fontSize: '10px', marginBottom: '5px' }}>{error}</div>}
                 </ErrorMessage>
@@ -93,7 +94,7 @@ const RegisterForm = ({ obj }) => {
                   name={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                ></Field>
+                />
                 <ErrorMessage name={field.name} component="div" />
               </div>
             ))}
@@ -107,7 +108,7 @@ const RegisterForm = ({ obj }) => {
                   name={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                ></Field>
+                />
                 <ErrorMessage name={field.name} component="div" />
               </div>
             ))}
@@ -122,7 +123,7 @@ const RegisterForm = ({ obj }) => {
 };
 
 RegisterForm.propTypes = {
-  obj: PropTypes.object,
+  editingUser: PropTypes.object,
 };
 
 export default RegisterForm;

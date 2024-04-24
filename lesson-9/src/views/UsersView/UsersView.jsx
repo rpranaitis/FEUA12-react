@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
 import style from './UsersView.module.scss';
 import Button from '../../components/Button/Button';
+import PropTypes from 'prop-types';
 
-const UsersView = () => {
+const UsersView = ({ setEditingUser }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const UsersView = () => {
             ))}
           </div>
           <div className={style.edition}>
-            <Button color="secondary">
+            <Button onClick={() => setEditingUser(user)} color="secondary">
               <CiEdit />
             </Button>
           </div>
@@ -56,6 +57,10 @@ const UsersView = () => {
       ))}
     </div>
   );
+};
+
+UsersView.propTypes = {
+  setEditingUser: PropTypes.func,
 };
 
 export default UsersView;
