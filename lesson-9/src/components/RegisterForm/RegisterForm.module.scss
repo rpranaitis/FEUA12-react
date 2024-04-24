@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formField {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid rgb(228, 228, 228);
+  outline: none;
+  font-size: 13px;
+}
+
+.fieldsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fieldsContainerTitle {
+  font-weight: bold;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-size: 12px;
+}
+
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &.small {
+    width: calc(33.333333333% - 6.7px);
+  }
+
+  &.medium {
+    width: calc(50% - 5px);
+  }
+
+  &.large {
+    width: 100%;
+  }
+}
+
+.errorBorder {
+  border: 1px solid #f16b6b;
+}

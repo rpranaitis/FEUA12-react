@@ -1,0 +1,31 @@
+.button {
+  padding: 10px 20px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #3598db;
+
+  &:disabled {
+    opacity: 0.3;
+  }
+}
+
+.primary {
+  background: #3598db;
+  color: white;
+
+  &:hover {
+    background: #3390ce;
+    border: 1px solid #3390ce;
+  }
+}
+
+.secondary {
+  background: white;
+  color: #3598db;
+
+  &:hover {
+    color: #3390ce;
+    border: 1px solid #3390ce;
+  }
+}
