@@ -10,7 +10,7 @@ const App = () => {
     <div className={style.container}>
       <div className={style.firstBlock}>
         <h3 className={style.title}>REGISTRATION FORM</h3>
-        <RegisterForm editingUser={editingUser} />
+        <RegisterForm editingUser={editingUser} setEditingUser={setEditingUser} />
       </div>
       <div className={style.secondBlock}>
         <h3 className={style.title}>USERS</h3>

@@ -38,23 +38,25 @@ const UsersView = ({ setEditingUser }) => {
 
   return (
     <div className={style.wrapper}>
-      {users.map((user) => (
-        <div className={style.user} key={user.id}>
-          <div className={style.details}>
-            {fields.map((field, fieldIndex) => (
-              <div className={style.detail} key={fieldIndex}>
-                <div className={style.fieldKey}>{field}:</div>
-                <div>{getUserFieldValue(user, field)}</div>
-              </div>
-            ))}
+      {users.map((user) => {
+        return (
+          <div className={style.user} key={user.id}>
+            <div className={style.details}>
+              {fields.map((field, fieldIndex) => (
+                <div className={style.detail} key={fieldIndex}>
+                  <div className={style.fieldKey}>{field}:</div>
+                  <div>{getUserFieldValue(user, field)}</div>
+                </div>
+              ))}
+            </div>
+            <div className={style.edition}>
+              <Button onClick={() => setEditingUser(user)} color="secondary">
+                <CiEdit />
+              </Button>
+            </div>
           </div>
-          <div className={style.edition}>
-            <Button onClick={() => setEditingUser(user)} color="secondary">
-              <CiEdit />
-            </Button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

@@ -1,17 +1,19 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerUser, updateUser } from '../../api/users';
-import { personalFields, addressFields, companyFields } from './fields';
+import { fields } from './fields';
 import { registerInitialValues } from './initialValues';
 import { validationSchema } from './validationSchema';
 import Button from '../Button/Button';
 import style from './RegisterForm.module.scss';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import Error from '../Error/Error';
 
-const RegisterForm = ({ editingUser }) => {
+const RegisterForm = ({ editingUser, setEditingUser }) => {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
       const response = editingUser ? await updateUser(values) : await registerUser(values);
+      setEditingUser(null);
       resetForm();
       setSubmitting(false);
     } catch (error) {
@@ -28,54 +30,29 @@ const RegisterForm = ({ editingUser }) => {
     >
       {({ isSubmitting }) => (
         <Form className={style.form}>
-          <div className={style.fieldsContainerTitle}>Personal information</div>
-          <div className={style.fieldsContainer}>
-            {personalFields.map((field, fieldIndex) => (
-              <div className={classNames(style.fieldWrapper, style[field['size']])} key={`${field.name}${fieldIndex}`}>
-                <Field
-                  className={style.formField}
-                  name={field.name}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                />
-                <ErrorMessage name={field.name}>
-                  {(error) => <div style={{ color: '#f16b6b', fontSize: '10px', marginBottom: '5px' }}>{error}</div>}
-                </ErrorMessage>
+          {fields.map((item, itemIndex) => {
+            return (
+              <div key={itemIndex}>
+                <div className={style.fieldsContainerTitle}>{item.name}</div>
+                <div className={style.fieldsContainer}>
+                  {item.fields.map((field, fieldIndex) => (
+                    <div
+                      className={classNames(style.fieldWrapper, style[field['size']])}
+                      key={`${field.name}${fieldIndex}`}
+                    >
+                      <Field
+                        className={style.formField}
+                        name={field.name}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                      />
+                      <ErrorMessage name={field.name} component={Error} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-          <div className={style.fieldsContainerTitle}>Address</div>
-          <div className={style.fieldsContainer}>
-            {addressFields.map((field, fieldIndex) => (
-              <div className={classNames(style.fieldWrapper, style[field['size']])} key={`${field.name}${fieldIndex}`}>
-                <Field
-                  className={style.formField}
-                  name={field.name}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                />
-                <ErrorMessage name={field.name}>
-                  {(error) => <div style={{ color: '#f16b6b', fontSize: '10px', marginBottom: '5px' }}>{error}</div>}
-                </ErrorMessage>
-              </div>
-            ))}
-          </div>
-          <div className={style.fieldsContainerTitle}>Company</div>
-          <div className={style.fieldsContainer}>
-            {companyFields.map((field, fieldIndex) => (
-              <div className={classNames(style.fieldWrapper, style[field['size']])} key={`${field.name}${fieldIndex}`}>
-                <Field
-                  className={style.formField}
-                  name={field.name}
-                  type={field.type}
-                  placeholder={field.placeholder}
-                />
-                <ErrorMessage name={field.name}>
-                  {(error) => <div style={{ color: '#f16b6b', fontSize: '10px', marginBottom: '5px' }}>{error}</div>}
-                </ErrorMessage>
-              </div>
-            ))}
-          </div>
+            );
+          })}
           <Button type="submit" style={{ width: '100%', marginTop: '10px' }} disabled={isSubmitting} color="primary">
             {editingUser ? 'EDIT' : 'REGISTER'}
           </Button>
@@ -86,7 +63,29 @@ const RegisterForm = ({ editingUser }) => {
 };
 
 RegisterForm.propTypes = {
-  editingUser: PropTypes.object,
+  editingUser: PropTypes.shape({
+    username: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    address: PropTypes.shape({
+      street: PropTypes.string,
+      suite: PropTypes.string,
+      city: PropTypes.string,
+      zipcode: PropTypes.string,
+      geo: PropTypes.shape({
+        lat: PropTypes.string,
+        lng: PropTypes.string,
+      }),
+    }),
+    phone: PropTypes.string,
+    website: PropTypes.string,
+    company: PropTypes.shape({
+      name: PropTypes.string,
+      catchPhrase: PropTypes.string,
+      bs: PropTypes.string,
+    }),
+  }),
+  setEditingUser: PropTypes.func,
 };
 
 export default RegisterForm;
