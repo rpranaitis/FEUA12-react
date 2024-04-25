@@ -14,7 +14,7 @@ const RegisterForm = ({ editingUser, setEditingUser }) => {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
       const response = editingUser ? await updateUser(values) : await registerUser(values);
-      alert(`Vartotojas buvo sėkmingai ${editingUser ? 'pakoreguotas' : 'sukurtas'}.`);
+      alert(`User was successfully ${editingUser ? 'updated' : 'created'}.`);
       setEditingUser(null);
       resetForm();
       setSubmitting(false);
