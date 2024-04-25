@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerUser, updateUser } from '../../api/users';
 import { fields } from './fields';
-import { isValueInObject } from '../../../utils/helpers';
+import { isValueInObject } from '../../utils/helpers';
 import { registerInitialValues } from './initialValues';
 import { validationSchema } from './validationSchema';
 import Button from '../Button/Button';
