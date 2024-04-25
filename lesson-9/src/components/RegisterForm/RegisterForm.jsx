@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { registerUser, updateUser } from '../../api/users';
 import { fields } from './fields';
+import { isValueInObject } from '../../../utils/helpers';
 import { registerInitialValues } from './initialValues';
 import { validationSchema } from './validationSchema';
 import Button from '../Button/Button';
@@ -13,6 +14,7 @@ const RegisterForm = ({ editingUser, setEditingUser }) => {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
       const response = editingUser ? await updateUser(values) : await registerUser(values);
+      alert(`Vartotojas buvo sėkmingai ${editingUser ? 'pakoreguotas' : 'sukurtas'}.`);
       setEditingUser(null);
       resetForm();
       setSubmitting(false);
@@ -28,7 +30,7 @@ const RegisterForm = ({ editingUser, setEditingUser }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ isSubmitting }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form className={style.form}>
           {fields.map((item, itemIndex) => {
             return (
@@ -41,7 +43,10 @@ const RegisterForm = ({ editingUser, setEditingUser }) => {
                       key={`${field.name}${fieldIndex}`}
                     >
                       <Field
-                        className={style.formField}
+                        className={classNames(
+                          style.formField,
+                          isValueInObject(errors, field.name) && isValueInObject(touched, field.name) ? style.error : ''
+                        )}
                         name={field.name}
                         type={field.type}
                         placeholder={field.placeholder}
