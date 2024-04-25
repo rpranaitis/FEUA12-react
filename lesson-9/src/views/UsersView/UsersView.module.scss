@@ -6,12 +6,17 @@
 
 .user {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   background: #f2f8fc;
   border: 1px solid #d1dee7;
   padding: 20px;
   border-radius: 5px;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .details {
@@ -22,7 +27,12 @@
 
 .detail {
   display: flex;
+  flex-direction: column;
   gap: 5px;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .fieldKey {
@@ -31,5 +41,12 @@
 }
 
 .edition {
-  margin: 20px 0 20px 20px;
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    margin: 20px 0 20px 20px;
+  }
 }
